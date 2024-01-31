@@ -49,17 +49,18 @@ app.post("/signup", async (req, res) => {
 
     if (existingUser) {
       // Email đã tồn tại
-      return res.send({ message: "Địa chỉ email đã tồn tại" });
+      return res.send({ message: "Địa chỉ email đã tồn tại", alert: false });
     }
 
     // Email chưa tồn tại
     const data = userModel(req.body);
     const save = data.save();
-    res.send({ message: "đăng ký thành công !!!" });
+    res.send({ message: "đăng ký thành công !!!", alert: true });
   } catch (error) {
     console.error("Error:", error);
     res.send({
       message: "Lỗi trong quá trình kiểm tra Email (vui lòng thử lại)",
+      alert: false,
     });
   }
 });

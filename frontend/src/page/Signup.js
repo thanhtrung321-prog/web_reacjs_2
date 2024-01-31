@@ -4,6 +4,9 @@ import { BiSolidShow } from "react-icons/bi";
 import { BiSolidHide } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
 import { ImagetoBase64 } from "../utility/ImagetoBase64";
+// gallery show nofication(Toast)
+import toast, { Toaster } from "react-hot-toast";
+//begin : Register
 const Signup = () => {
   //convert page after success(chuyển trang sau khi thành công(navigate))
   const navigate = useNavigate();
@@ -24,6 +27,7 @@ const Signup = () => {
   const HandleConfirmPassword = () => {
     setConfirmPassword((preve) => !preve);
   };
+  // function update values current time
   const handleOnchange = (e) => {
     const { name, value } = e.target;
     setData((preve) => {
@@ -63,13 +67,34 @@ const Signup = () => {
         );
         const dataRes = await fetchData.json();
         console.log(dataRes);
-        alert(dataRes.message);
-        //navigate("/login");
+        //nofications
+        if (dataRes.alert) {
+          toast(dataRes.message, {
+            style: {
+              color: "green",
+            },
+          });
+          navigate("/login");
+        } else {
+          toast(dataRes.message, {
+            style: {
+              color: "red",
+            },
+          });
+        }
       } else {
-        alert("mật khẩu và mật khẩu nhập lại không trùng nhau !");
+        toast("mật khẩu bạn nhập không trùng nhau (vui lòng nhập lại) !!!", {
+          style: {
+            color: "red",
+          },
+        });
       }
     } else {
-      alert("Vui lòng nhập vào các ô bắt buộc");
+      toast("Vui lòng nhập vào ô bắt buộc", {
+        style: {
+          color: "red",
+        },
+      });
     }
   };
   return (
