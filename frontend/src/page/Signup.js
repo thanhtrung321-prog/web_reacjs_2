@@ -51,9 +51,20 @@ const Signup = () => {
     const { firstName, email, password, confirmPassword } = data;
     if (firstName && email && password && confirmPassword) {
       if (password === confirmPassword) {
-        const fetchData = await fetch("");
-        alert("Thành công !!!");
-        navigate("/login");
+        const fetchData = await fetch(
+          `${process.env.REACT_APP_SERVER_DOMIN}/signup`,
+          {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(data),
+          }
+        );
+        const dataRes = await fetchData.json();
+        console.log(dataRes);
+        // alert("Thành công !!!");
+        // navigate("/login");
       } else {
         alert("mật khẩu và mật khẩu nhập lại không trùng nhau !");
       }
