@@ -63,8 +63,8 @@ const Signup = () => {
         );
         const dataRes = await fetchData.json();
         console.log(dataRes);
-        // alert("Thành công !!!");
-        // navigate("/login");
+        alert(dataRes.message);
+        //navigate("/login");
       } else {
         alert("mật khẩu và mật khẩu nhập lại không trùng nhau !");
       }
