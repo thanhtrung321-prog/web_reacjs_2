@@ -7,6 +7,8 @@ import Home from "./page/Home";
 import Menu from "./page/Menu";
 import About from "./page/About";
 import Contact from "./page/Contact";
+import Login from "./page/login";
+import Newproduct from "./page/newproduct";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -14,7 +16,7 @@ import {
   Router,
   RouterProvider,
 } from "react-router-dom";
-
+// router
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
@@ -22,10 +24,12 @@ const router = createBrowserRouter(
       <Route path="menu" element={<Menu />} />
       <Route path="about" element={<About />} />
       <Route path="contact" element={<Contact />} />
+      <Route path="login" element={<Login />} />
+      <Route path="newproduct" element={<Newproduct />}/>
     </Route>
   )
 );
-
+// end router
 const root = ReactDOM.createRoot(document.getElementById("root"));
 // this the router supplier(đây là nhà cung cấp bộ định tuyến)
 root.render(<RouterProvider router={router} />);

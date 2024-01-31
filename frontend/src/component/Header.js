@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logo_thanhtrung from "../assest/logo.png";
 import { HiOutlineUserCircle } from "react-icons/hi";
 import { BsFillCartFill } from "react-icons/bs";
 
 const Header = () => {
+  const [ShowMenu, setShowMenu] = useState(false);
+  const handleShowMenu = () => {
+    setShowMenu((preve) => !preve);
+  };
   return (
     <header className="fixed shadow-md w-full h-16 px-2 md:px-4 z-50">
       {/* desktop */}
@@ -27,14 +31,23 @@ const Header = () => {
               0
             </div>
           </div>
-          <div className=" text-slate-600">
+          <div className=" text-slate-600" onClick={handleShowMenu}>
             <div className="text-3xl cursor-pointer">
               <HiOutlineUserCircle />
             </div>
-            <div className="absolute ">
-              <p className="white-space-nowrap">Sản phẩm mới</p>
-              <p className="whitespace-nowrap">Đăng nhập</p>
-            </div>
+            {ShowMenu && (
+              <div className="absolute right-2 bg-white py-2 px-2 shadow drop-shadow-md flex flex-col">
+                <Link
+                  to={"newproduct"}
+                  className="white-space-nowrap cursor-pointer"
+                >
+                  Sản phẩm mới
+                </Link>
+                <Link to={"login"} className="whitespace-nowrap cursor-pointer">
+                  Đăng nhập
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>
