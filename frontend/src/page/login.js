@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setConfirmPassword] = useState(false);
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -15,9 +14,7 @@ const Login = () => {
   const HandlePassword = () => {
     setShowPassword((preve) => !preve);
   };
-  const HandleConfirmPassword = () => {
-    setConfirmPassword((preve) => !preve);
-  };
+
   const handleOnchange = (e) => {
     const { name, value } = e.target;
     setData((preve) => {
@@ -32,11 +29,7 @@ const Login = () => {
     e.preventDefault();
     const { email, password } = data;
     if (email && password) {
-      if (password) {
-        alert("Thành công !!!");
-      } else {
-        alert("mật khẩu và mật khẩu nhập lại không trùng nhau !");
-      }
+      alert("Thành công !!!");
     } else {
       alert("Vui lòng nhập vào các ô bắt buộc");
     }

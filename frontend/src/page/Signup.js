@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import LoginSignupImage from "../assest/login-animation.gif";
 import { BiSolidShow } from "react-icons/bi";
 import { BiSolidHide } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { ImagetoBase64 } from "../utility/ImagetoBase64";
 const Signup = () => {
+  //convert page after success(chuyển trang sau khi thành công(navigate))
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setConfirmPassword] = useState(false);
   const [data, setData] = useState({
@@ -12,6 +15,7 @@ const Signup = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    image: "",
   });
   console.log(data);
   const HandlePassword = () => {
@@ -29,13 +33,27 @@ const Signup = () => {
       };
     });
   };
+  //upload image
+  const handleUploadProfileImage = async (e) => {
+    const data = await ImagetoBase64(e.target.files[0]);
+    console.log(data);
+    setData((preve) => {
+      return {
+        ...preve,
+        image: data,
+      };
+    });
+  };
+  console.log(process.env.REACT_APP_SERVER_DOMIN);
   // catches click event(bắt sự kiện click chuột)
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const { firstName, email, password, confirmPassword } = data;
     if (firstName && email && password && confirmPassword) {
       if (password === confirmPassword) {
+        const fetchData = await fetch("");
         alert("Thành công !!!");
+        navigate("/login");
       } else {
         alert("mật khẩu và mật khẩu nhập lại không trùng nhau !");
       }
@@ -47,8 +65,24 @@ const Signup = () => {
     <div className="p-3 md:p-4">
       <div className="w-full max-w-sm bg-white m-auto flex flex-col p-4 ">
         {/* <h1 className="text-center text-2xl font-bold">Đăng ký tài khoản</h1> */}
-        <div className="w-20 overflow-hidden rounded-full drop-shadow-md shadow-md m-auto">
-          <img src={LoginSignupImage} className="w-full" />
+        <div className="w-20 h-20 overflow-hidden rounded-full drop-shadow-md shadow-md m-auto relative">
+          <img
+            src={data.image ? data.image : LoginSignupImage}
+            className="w-full h-full"
+          />
+          <label htmlFor="profileImage">
+            <div className="absolute bottom-0 h-1/3 bg-opacity-50 bg-slate-500 w-full text-center">
+              <p className="text-sm p-1 text-white cursor-pointer">Thêm ảnh</p>
+            </div>
+            <input
+              type={"file"}
+              id="profileImage"
+              //   chỉ nhận hình ảnh(accept="image/jpeg như này là chỉ nhận ảnh jpeg)
+              accept="image/*"
+              className="hidden"
+              onChange={handleUploadProfileImage}
+            />
+          </label>
         </div>
         <form className="w-full py-3 flex flex-col" onSubmit={handleSubmit}>
           <label htmlFor="firstName">Tên</label>
