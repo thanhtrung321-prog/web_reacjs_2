@@ -64,5 +64,39 @@ app.post("/signup", async (req, res) => {
     });
   }
 });
+// API login(Function handel login)
+app.post("/login", async (req, res) => {
+  try {
+    const { email } = req.body;
+    const result = await userModel.findOne({ email: email });
 
+    if (result) {
+      const dataSend = {
+        _id: result._id,
+        firstName: result.firstName,
+        lastName: result.lastName,
+        email: result.email,
+        image: result.image,
+      };
+      console.log(dataSend);
+      res.send({
+        message: "Đăng nhập thành công !!!",
+        alert: true,
+        data: dataSend,
+      });
+    } else {
+      res.send({
+        message: "Email không tồn tại",
+        alert: false,
+      });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: "Đã xảy ra lỗi trong quá trình xử lý đăng nhập",
+      alert: false,
+    });
+  }
+});
+// End API login(Function handel login)
 app.listen(PORT, () => console.log("sever đang chạy trên địa chỉ " + PORT));

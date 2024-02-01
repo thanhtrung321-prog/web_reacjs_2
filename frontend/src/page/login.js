@@ -3,13 +3,15 @@ import LoginSignupImage from "../assest/login-animation.gif";
 import { BiSolidShow } from "react-icons/bi";
 import { BiSolidHide } from "react-icons/bi";
 import { Link } from "react-router-dom";
-
+import toast, { Toaster } from "react-hot-toast";
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  // data login
   const [data, setData] = useState({
     email: "",
     password: "",
   });
+  // end data login
   console.log(data);
   const HandlePassword = () => {
     setShowPassword((preve) => !preve);
@@ -25,13 +27,36 @@ const Login = () => {
     });
   };
   // catches click event(bắt sự kiện click chuột)
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const { email, password } = data;
     if (email && password) {
-      alert("Thành công !!!");
+      const fetchDatas = await fetch(
+        `${process.env.REACT_APP_SERVER_DOMIN}/login`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+      const dataRes = await fetchDatas.json();
+      console.log(dataRes);
+      // function handle color text
+      const messageColor = dataRes.alert ? "green" : "red";
+      toast(dataRes.message, {
+        style: {
+          color: messageColor,
+        },
+      });
+      // End function handle color text
     } else {
-      alert("Vui lòng nhập vào các ô bắt buộc");
+      toast("Vui lòng nhập vào các ô bắt buộc", {
+        style: {
+          color: "red",
+        },
+      });
     }
   };
   return (

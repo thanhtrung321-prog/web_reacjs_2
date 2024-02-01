@@ -3,10 +3,11 @@ import "./App.css";
 import Header from "./component/Header";
 import { Outlet } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 function App() {
   return (
     <>
+      {/* Toaster dùng để hiển thị thông báo */}
       <Toaster />
       <div>
         <Header />
