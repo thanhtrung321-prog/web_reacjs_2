@@ -67,26 +67,17 @@ app.post("/signup", async (req, res) => {
 // API login(Function handel login)
 app.post("/login", async (req, res) => {
   try {
-    const { email } = req.body;
-    const result = await userModel.findOne({ email: email });
-
-    if (result) {
-      const dataSend = {
-        _id: result._id,
-        firstName: result.firstName,
-        lastName: result.lastName,
-        email: result.email,
-        image: result.image,
-      };
-      console.log(dataSend);
-      res.send({
-        message: "Đăng nhập thành công !!!",
+    const { email, password } = req.body;
+    const user = await userModel.findOne({ email: email });
+    if (user && password === user.password) {
+      res.status(200).json({
+        message: "Đăng nhập thành công",
         alert: true,
-        data: dataSend,
+        data: user, // Gửi toàn bộ thông tin người dùng
       });
     } else {
-      res.send({
-        message: "Email không tồn tại",
+      res.status(404).json({
+        message: "Email không tồn tại hoặc sai mật khẩu !!!",
         alert: false,
       });
     }
@@ -98,5 +89,6 @@ app.post("/login", async (req, res) => {
     });
   }
 });
+
 // End API login(Function handel login)
 app.listen(PORT, () => console.log("sever đang chạy trên địa chỉ " + PORT));

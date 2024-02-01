@@ -4,6 +4,7 @@ import { BiSolidShow } from "react-icons/bi";
 import { BiSolidHide } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   // data login
@@ -11,6 +12,8 @@ const Login = () => {
     email: "",
     password: "",
   });
+  // next page
+  const navigate = useNavigate();
   // end data login
   console.log(data);
   const HandlePassword = () => {
@@ -45,6 +48,11 @@ const Login = () => {
       console.log(dataRes);
       // function handle color text
       const messageColor = dataRes.alert ? "green" : "red";
+      if (dataRes.alert === true) {
+        setTimeout(() => {
+          navigate("/");
+        }, 1200);
+      } else navigate("/login");
       toast(dataRes.message, {
         style: {
           color: messageColor,
