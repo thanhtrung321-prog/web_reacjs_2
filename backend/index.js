@@ -65,21 +65,38 @@ app.post("/signup", async (req, res) => {
   }
 });
 // API login(Function handel login)
+// Biến toàn cục để theo dõi số lần thất bại
+let loginindex = 0;
+
 app.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await userModel.findOne({ email: email });
+
     if (user && password === user.password) {
       res.status(200).json({
         message: "Đăng nhập thành công",
         alert: true,
-        data: user, // Gửi toàn bộ thông tin người dùng
+        data: user,
       });
     } else {
-      res.status(404).json({
-        message: "Email không tồn tại hoặc sai mật khẩu !!!",
-        alert: false,
-      });
+      loginindex++;
+
+      if (loginindex <= 3) {
+        res.status(404).json({
+          message:
+            "Sai tài khoản Email hoặc mật khẩu (vui lòng kiểm tra lại)!!!",
+          alert: false,
+        });
+      } else {
+        res.status(400).json({
+          message: "Cứ từ từ Bạn đang spam quá nhanh !!!",
+          alert: false,
+        });
+
+        // Đặt lại số lần thất bại sau khi đạt đến giới hạn
+        loginindex = 0;
+      }
     }
   } catch (error) {
     console.error(error);

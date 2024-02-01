@@ -3,9 +3,14 @@ import { Link } from "react-router-dom";
 import logo_thanhtrung from "../assest/logo.png";
 import { HiOutlineUserCircle } from "react-icons/hi";
 import { BsFillCartFill } from "react-icons/bs";
+import { UseSelector, useSelector } from "react-redux";
 
 const Header = () => {
   const [ShowMenu, setShowMenu] = useState(false);
+  // show user
+  const userData = useSelector((state) => state.user);
+  console.log(userData);
+  // End show user
   const handleShowMenu = () => {
     setShowMenu((preve) => !preve);
   };
@@ -33,7 +38,14 @@ const Header = () => {
           </div>
           <div className=" text-slate-600" onClick={handleShowMenu}>
             <div className="text-3xl cursor-pointer">
-              <HiOutlineUserCircle />
+              {userData.image ? (
+                <img
+                  src={userData.image}
+                  className="w-10 h-10 object-cover drop-shadow rounded-full cursor-pointer overflow-hidden"
+                />
+              ) : (
+                <HiOutlineUserCircle />
+              )}
             </div>
             {ShowMenu && (
               <div className="absolute right-2 bg-white py-2 px-2 shadow drop-shadow-md flex flex-col">
@@ -43,9 +55,21 @@ const Header = () => {
                 >
                   Sản phẩm mới
                 </Link>
-                <Link to={"login"} className="whitespace-nowrap cursor-pointer">
-                  Đăng nhập
-                </Link>
+                {userData.image ? (
+                  <Link
+                    to={"login"}
+                    className="whitespace-nowrap cursor-pointer"
+                  >
+                    Thông tin tài khoản
+                  </Link>
+                ) : (
+                  <Link
+                    to={"login"}
+                    className="whitespace-nowrap cursor-pointer"
+                  >
+                    Đăng nhập
+                  </Link>
+                )}
               </div>
             )}
           </div>

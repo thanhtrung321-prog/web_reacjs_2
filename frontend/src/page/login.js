@@ -5,6 +5,9 @@ import { BiSolidHide } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { loginRedux } from "../redux/userSlice";
+
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   // data login
@@ -14,6 +17,11 @@ const Login = () => {
   });
   // next page
   const navigate = useNavigate();
+
+  // setup eviroment login
+  const userData = useSelector((state) => state);
+  // function use login display ifo user
+  const dispatch = useDispatch();
   // end data login
   console.log(data);
   const HandlePassword = () => {
@@ -29,6 +37,7 @@ const Login = () => {
       };
     });
   };
+  var index = 0;
   // catches click event(bắt sự kiện click chuột)
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,6 +58,7 @@ const Login = () => {
       // function handle color text
       const messageColor = dataRes.alert ? "green" : "red";
       if (dataRes.alert === true) {
+        dispatch(loginRedux(dataRes));
         setTimeout(() => {
           navigate("/");
         }, 1200);
@@ -60,11 +70,22 @@ const Login = () => {
       });
       // End function handle color text
     } else {
+      index++;
       toast("Vui lòng nhập vào các ô bắt buộc", {
         style: {
           color: "red",
         },
       });
+      if (index >= 3) {
+        toast("Từ Từ thôi bạn ơi (vui lòng chậm lại !!!)", {
+          style: {
+            color: "blue",
+          },
+        });
+        setInterval(() => {
+          index = 0;
+        }, 2500);
+      }
     }
   };
   return (
