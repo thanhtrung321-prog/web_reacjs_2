@@ -21,6 +21,7 @@ export const userSlice = createSlice({
       state.email = action.payload.data.email;
       state.image = action.payload.data.image;
     },
+    // function handle logout
     logoutRedux: (state, action) => {
       state._id = "";
       state.firstName = "";

@@ -3,16 +3,27 @@ import { Link } from "react-router-dom";
 import logo_thanhtrung from "../assest/logo.png";
 import { HiOutlineUserCircle } from "react-icons/hi";
 import { BsFillCartFill } from "react-icons/bs";
-import { UseSelector, useSelector } from "react-redux";
-
+import { UseSelector, useDispatch, useSelector } from "react-redux";
+import { logoutRedux } from "../redux/userSlice";
+import toast, { Toaster } from "react-hot-toast";
 const Header = () => {
   const [ShowMenu, setShowMenu] = useState(false);
   // show user
   const userData = useSelector((state) => state.user);
   console.log(userData);
+  const dispath = useDispatch();
   // End show user
   const handleShowMenu = () => {
     setShowMenu((preve) => !preve);
+  };
+  // handle logout user
+  const handleLogout = () => {
+    dispath(logoutRedux());
+    toast("đăng xuất thành công !!", {
+      style: {
+        color: "green",
+      },
+    });
   };
   return (
     <header className="fixed shadow-md w-full h-16 px-2 md:px-4 z-50 bg-white">
@@ -48,24 +59,32 @@ const Header = () => {
               )}
             </div>
             {ShowMenu && (
-              <div className="absolute right-2 bg-white py-2 px-2 shadow drop-shadow-md flex flex-col">
+              <div className="absolute right-2 text-center  bg-white py-2 p-2  shadow drop-shadow-md flex flex-col">
                 <Link
                   to={"newproduct"}
-                  className="white-space-nowrap cursor-pointer"
+                  className="white-space-nowrap cursor-pointer text-white bg-red-500 hover:bg-black "
                 >
                   Sản phẩm mới
                 </Link>
                 {userData.image ? (
-                  <Link
-                    to={"login"}
-                    className="whitespace-nowrap cursor-pointer"
-                  >
-                    Thông tin tài khoản
-                  </Link>
+                  <div className="flex flex-col">
+                    <Link
+                      to={"account-info"}
+                      className="whitespace-nowrap cursor-pointer pt-1 text-white bg-red-500 hover:bg-black "
+                    >
+                      Thông tin tài khoản
+                    </Link>
+                    <Link
+                      className="whitespace-nowrap cursor-pointer pt-1 text-white bg-red-500 hover:bg-black "
+                      onClick={handleLogout}
+                    >
+                      Đăng xuất
+                    </Link>
+                  </div>
                 ) : (
                   <Link
                     to={"login"}
-                    className="whitespace-nowrap cursor-pointer"
+                    className="whitespace-nowrap cursor-pointer text-white bg-red-500 hover:bg-black"
                   >
                     Đăng nhập
                   </Link>
