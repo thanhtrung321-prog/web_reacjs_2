@@ -71,20 +71,22 @@ const Login = () => {
       // End function handle color text
     } else {
       index++;
-      toast("Vui lòng nhập vào các ô bắt buộc", {
-        style: {
-          color: "red",
-        },
-      });
+      if (index <= 3) {
+        toast("Vui lòng nhập vào các ô bắt buộc", {
+          style: {
+            color: "red",
+          },
+        });
+        setInterval(() => {
+          index = 0;
+        }, 4000);
+      }
       if (index >= 3) {
         toast("Từ Từ thôi bạn ơi (vui lòng chậm lại !!!)", {
           style: {
             color: "blue",
           },
         });
-        setInterval(() => {
-          index = 0;
-        }, 2500);
       }
     }
   };
