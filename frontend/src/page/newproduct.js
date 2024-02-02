@@ -5,7 +5,11 @@ const Newproduct = () => {
     <div className="p-4">
       <form className="m-auto w-full max-w-sm  shadow flex flex-col p-3 bg-white">
         <label htmlFor="name">Tên sản phẩm :</label>
-        <input type={"text"} name="name" className="bg-slate-200 p-2 my-2" />
+        <input
+          type={"text"}
+          name="name"
+          className="bg-slate-200 p-2 my-2  focus-within:outline-green-500"
+        />
         <label htmlFor="category">Danh mục sản phẩm :</label>
         <select className="bg-slate-200 p-2" id="category">
           <option>Trái cây</option>
@@ -26,9 +30,16 @@ const Newproduct = () => {
         <label htmlFor="price" className="my-1">
           Giá :
         </label>
-        <input type="text" name="price" className="bg-slate-200 p-2 my-2" />
+        <input
+          type="text"
+          name="price"
+          className="bg-slate-200 p-2 my-2  focus-within:outline-green-500"
+        />
         <label htmlFor="description">Mô tả :</label>
-        <textarea rows={3} className="bg-slate-200 p-2 my-2"></textarea>
+        <textarea
+          rows={3}
+          className="bg-slate-200 p-2 my-2 focus-within:outline-green-500"
+        ></textarea>
       </form>
     </div>
   );
