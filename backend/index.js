@@ -107,5 +107,17 @@ app.post("/login", async (req, res) => {
   }
 });
 
+// API ADD product
+// add CSDL MONGODB
+const SchemaProduct = mongoose.Schema({
+  name: String,
+  product: String,
+  image: String,
+  price: String,
+  description: String,
+});
+const productModel = mongoose.model("product", SchemaProduct);
+// END ADD product
+//Save product in database Mongodb
 // End API login(Function handel login)
 app.listen(PORT, () => console.log("sever đang chạy trên địa chỉ " + PORT));

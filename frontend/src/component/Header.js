@@ -64,7 +64,7 @@ const Header = () => {
                   to={"newproduct"}
                   className="white-space-nowrap cursor-pointer text-white bg-red-500 hover:bg-black "
                 >
-                  Sản phẩm mới
+                  Thêm Sản phẩm mới
                 </Link>
                 {userData.image ? (
                   <div className="flex flex-col">
