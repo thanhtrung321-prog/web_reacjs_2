@@ -119,5 +119,18 @@ const SchemaProduct = mongoose.Schema({
 const productModel = mongoose.model("product", SchemaProduct);
 // END ADD product
 //Save product in database Mongodb
+app.post("/uploadProduct", async (req, res) => {
+  // console.log(req.body)
+  const data = await productModel(req.body);
+  const datasave = await data.save();
+  res.send({ message: "Thêm thành công sản phẩm" });
+});
+
+//
+app.get("/product", async (req, res) => {
+  const data = await productModel.find({});
+  res.send(JSON.stringify(data));
+});
+// END Save product in database Mongodb
 // End API login(Function handel login)
 app.listen(PORT, () => console.log("sever đang chạy trên địa chỉ " + PORT));

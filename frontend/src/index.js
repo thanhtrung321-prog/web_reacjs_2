@@ -8,7 +8,7 @@ import Menu from "./page/Menu";
 import About from "./page/About";
 import Contact from "./page/Contact";
 import Login from "./page/login";
-import Newproduct from "./page/newproduct";
+import Newproduct from "./page/Newproduct";
 import Signup from "./page/Signup";
 import { store } from "./redux/index";
 import { Provider } from "react-redux";

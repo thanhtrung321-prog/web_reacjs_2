@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { IoCloudUploadOutline } from "react-icons/io5";
 import { ImagetoBase64 } from "../utility/ImagetoBase64";
+import { toast } from "react-hot-toast";
 const Newproduct = () => {
   // handle add product
   const [data, setData] = useState({
@@ -28,15 +29,57 @@ const Newproduct = () => {
       };
     });
   };
-  const HandleSubmit = (e) => {
+  // product API
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(data);
+
+    const { name, image, category, price } = data;
+
+    if (name && image && category && price) {
+      const fetchData = await fetch(
+        `${process.env.REACT_APP_SERVER_DOMIN}/uploadProduct`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      const fetchRes = await fetchData.json();
+
+      console.log(fetchRes);
+      toast(fetchRes.message, {
+        style: {
+          color: "green",
+        },
+      });
+
+      setData(() => {
+        return {
+          name: "",
+          category: "",
+          image: "",
+          price: "",
+          description: "",
+        };
+      });
+    } else {
+      toast("Vui lòng nhập vào ô bắt buộc", {
+        style: {
+          color: "red",
+        },
+      });
+    }
   };
   //end handle add product
   return (
     <div className="p-4">
       <form
         className="m-auto w-full max-w-sm  shadow flex flex-col p-3 bg-white"
-        onSubmit={HandleSubmit}
+        onSubmit={handleSubmit}
       >
         <label htmlFor="name">Tên sản phẩm :</label>
         <input
