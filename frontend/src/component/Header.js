@@ -60,16 +60,16 @@ const Header = () => {
             </div>
             {ShowMenu && (
               <div className="absolute right-2 text-center  bg-white py-2 p-2  shadow drop-shadow-md flex flex-col">
-                <Link
-                  to={"newproduct"}
-                  className="white-space-nowrap cursor-pointer text-white bg-red-500 hover:bg-black "
-                >
-                  Thêm Sản phẩm mới
-                </Link>
                 {userData.image ? (
                   <div className="flex flex-col">
                     <Link
-                      to={"account-info"}
+                      to={"newproduct"}
+                      className="white-space-nowrap cursor-pointer text-white bg-red-500 hover:bg-black "
+                    >
+                      Thêm Sản phẩm mới
+                    </Link>
+                    <Link
+                      to={"inforusers"}
                       className="whitespace-nowrap cursor-pointer pt-1 text-white bg-red-500 hover:bg-black "
                     >
                       Thông tin tài khoản

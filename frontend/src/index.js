@@ -12,6 +12,7 @@ import Newproduct from "./page/Newproduct";
 import Signup from "./page/Signup";
 import { store } from "./redux/index";
 import { Provider } from "react-redux";
+import Inforusers from "./page/Inforusers";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -30,6 +31,7 @@ const router = createBrowserRouter(
       <Route path="login" element={<Login />} />
       <Route path="newproduct" element={<Newproduct />} />
       <Route path="signup" element={<Signup />} />
+      <Route path="inforusers" element={<Inforusers />} />
     </Route>
   )
 );

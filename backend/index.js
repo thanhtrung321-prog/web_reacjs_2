@@ -109,14 +109,14 @@ app.post("/login", async (req, res) => {
 
 // API ADD product
 // add CSDL MONGODB
-const SchemaProduct = mongoose.Schema({
+const schemaProduct = mongoose.Schema({
   name: String,
-  product: String,
+  category: String,
   image: String,
   price: String,
   description: String,
 });
-const productModel = mongoose.model("product", SchemaProduct);
+const productModel = mongoose.model("product", schemaProduct);
 // END ADD product
 //Save product in database Mongodb
 app.post("/uploadProduct", async (req, res) => {
@@ -132,5 +132,10 @@ app.get("/product", async (req, res) => {
   res.send(JSON.stringify(data));
 });
 // END Save product in database Mongodb
+//----------------------------------------//
+//----------------------------------------//
+// Start function take database user
+
+//END function take database user
 // End API login(Function handel login)
 app.listen(PORT, () => console.log("sever đang chạy trên địa chỉ " + PORT));

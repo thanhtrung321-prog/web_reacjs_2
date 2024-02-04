@@ -95,23 +95,24 @@ const Newproduct = () => {
           onChange={HandleOnchange}
           name="category"
         >
-          <option>Trái cây</option>
-          <option>Rau củ</option>
-          <option>Bánh kem</option>
-          <option>Dosa</option>
-          <option>Piza</option>
+          <option value={"category"}>Chọn danh mục:</option>
+          <option value={"traicay"}>Trái cây</option>
+          <option value={"raucu"}>Rau củ</option>
+          <option value={"banhkem"}>Bánh kem</option>
+          <option value={"dosa"}>Dosa</option>
+          <option value={"piza"}>Piza</option>
         </select>
         <label htmlFor="image">
           Hình ảnh :
-          <div className="h-40 w-full bg-slate-200 my-5 rounded flex flex-col justify-center items-center cursor-pointer">
-            <span className="text-5xl">
+          <div className="h-40 w-full bg-slate-200 my-6 rounded flex flex-col justify-center items-center cursor-pointer">
+            <span className="text-5xl w-[22.5rem] relative">
               {data.image ? (
                 <img
                   src={data.image}
-                  className="min-h-40 h-full w-full rounded object-fill"
+                  className="w-full h-52 rounded object-fill"
                 />
               ) : (
-                <IoCloudUploadOutline className="cursor-pointer" />
+                <IoCloudUploadOutline className="cursor-pointer absolute left-[43%]" />
               )}
             </span>
             <input
