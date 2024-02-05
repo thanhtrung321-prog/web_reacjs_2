@@ -31,9 +31,7 @@ const Newproduct = () => {
   };
   // product API
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(data);
-
+    e.preventDefault(); // prever bihavior default
     const { name, image, category, price } = data;
 
     if (name && image && category && price) {
