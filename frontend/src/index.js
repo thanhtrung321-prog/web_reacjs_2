@@ -14,6 +14,7 @@ import { store } from "./redux/index";
 import { Provider } from "react-redux";
 import Inforusers from "./page/Inforusers";
 import Admin from "./page/Admin";
+import Bangdieukhien from "./page/admin/Bangdieukhien";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -34,6 +35,7 @@ const router = createBrowserRouter(
       <Route path="signup" element={<Signup />} />
       <Route path="inforusers" element={<Inforusers />} />
       <Route path="admin" element={<Admin />} />
+      <Route path="bangdieukhien" element={<Bangdieukhien />} />
     </Route>
   )
 );
