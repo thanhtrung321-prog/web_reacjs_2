@@ -13,13 +13,14 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     loginRedux: (state, action) => {
-      console.log(action.payload.data);
+      //console.log(action.payload.data);
       //   state.user = action.payload.data;
       state._id = action.payload.data._id;
       state.firstName = action.payload.data.firstName;
       state.lastName = action.payload.data.lastName;
       state.email = action.payload.data.email;
       state.image = action.payload.data.image;
+      state.role = action.payload.data.role;
     },
     // function handle logout
     logoutRedux: (state, action) => {
@@ -28,6 +29,7 @@ export const userSlice = createSlice({
       state.lastName = "";
       state.email = "";
       state.image = "";
+      state.role = "";
     },
   },
 });

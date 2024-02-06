@@ -10,7 +10,6 @@ const Header = () => {
   const [ShowMenu, setShowMenu] = useState(false);
   // show user
   const userData = useSelector((state) => state.user);
-  console.log(userData);
   const dispath = useDispatch();
   // End show user
   const handleShowMenu = () => {
@@ -60,25 +59,40 @@ const Header = () => {
             </div>
             {ShowMenu && (
               <div className="absolute right-2 text-center  bg-white py-2 p-2  shadow drop-shadow-md flex flex-col">
-                {userData.image ? (
+                {userData.image || userData.email ? (
                   <div className="flex flex-col">
-                    <Link
-                      to={"newproduct"}
-                      className="white-space-nowrap cursor-pointer text-white bg-red-500 hover:bg-black "
-                    >
-                      Thêm Sản phẩm mới
-                    </Link>
+                    {parseInt(userData.role) === 2 ? (
+                      <Link
+                        to={"newproduct"}
+                        className="white-space-nowrap cursor-pointer text-white bg-red-500 hover:bg-black "
+                      >
+                        Thêm Sản phẩm mới
+                      </Link>
+                    ) : (
+                      ""
+                    )}
                     <Link
                       to={"inforusers"}
                       className="whitespace-nowrap cursor-pointer pt-1 text-white bg-red-500 hover:bg-black "
                     >
                       Thông tin tài khoản
                     </Link>
+
+                    {parseInt(userData.role) === 2 ? (
+                      <Link
+                        to={"admin"}
+                        className="whitespace-nowrap cursor-pointer pt-1 text-white bg-red-500 hover:bg-black"
+                      >
+                        Người quản trị
+                      </Link>
+                    ) : (
+                      ""
+                    )}
                     <Link
                       className="whitespace-nowrap cursor-pointer pt-1 text-white bg-red-500 hover:bg-black "
                       onClick={handleLogout}
                     >
-                      Đăng xuất
+                      Đăng xuất : {userData.firstName}
                     </Link>
                   </div>
                 ) : (

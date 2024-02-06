@@ -85,6 +85,7 @@ const Newproduct = () => {
           name="name"
           className="bg-slate-200 p-2 my-2  focus-within:outline-green-500"
           onChange={HandleOnchange}
+          value={data.name}
         />
         <label htmlFor="category">Danh mục sản phẩm :</label>
         <select
@@ -92,11 +93,12 @@ const Newproduct = () => {
           id="category"
           onChange={HandleOnchange}
           name="category"
+          value={data.category}
         >
           <option value={"category"}>Chọn danh mục:</option>
-          <option value={"traicay"}>Trái cây</option>
-          <option value={"raucu"}>Rau củ</option>
-          <option value={"banhkem"}>Bánh kem</option>
+          <option value={"Trái cây"}>Trái cây</option>
+          <option value={"rau củ"}>Rau củ</option>
+          <option value={"bánh kem"}>Bánh kem</option>
           <option value={"dosa"}>Dosa</option>
           <option value={"piza"}>Piza</option>
         </select>
@@ -130,6 +132,7 @@ const Newproduct = () => {
           name="price"
           className="bg-slate-200 p-2 my-2  focus-within:outline-green-500"
           onChange={HandleOnchange}
+          value={data.price}
         />
         <label htmlFor="description">Mô tả :</label>
         <textarea
@@ -137,6 +140,7 @@ const Newproduct = () => {
           className="bg-slate-200 p-2 my-2 focus-within:outline-green-500 resize-none"
           onChange={HandleOnchange}
           name="description"
+          value={data.description}
         ></textarea>
         <button className="w-full h-10 my-2 bg-teal-400 rounded hover:bg-teal-600">
           Lưu

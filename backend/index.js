@@ -26,6 +26,7 @@ const userSchema = mongoose.Schema({
   password: String,
   confirmPassword: String,
   image: String,
+  role: String,
 });
 // end kế hoạch(tạo ra csdl)
 
@@ -52,8 +53,9 @@ app.post("/signup", async (req, res) => {
       return res.send({ message: "Địa chỉ email đã tồn tại", alert: false });
     }
 
-    // Email chưa tồn tại
+    // END Email chưa tồn tại
     const data = userModel(req.body);
+    data.role = "1";
     const save = data.save();
     res.send({ message: "đăng ký thành công !!!", alert: true });
   } catch (error) {

@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 const Inforusers = () => {
+  const userData = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   return (
     <div className="flex bg-slate-300 w-full h-[100vh] m-auto items-center p-8">
       <div className="bg-blue-300 p-4 rounded-md flex ">
         <div className="p-4 rounded-md mr-8 text-center ">
           <h3 className="text-2xl mb-2">Hình ảnh:</h3>
           <img
-            src={""}
+            src={userData.image}
             id="image-user"
             className="image-user w-20 h-20 rounded-full"
             alt=""
@@ -16,11 +19,11 @@ const Inforusers = () => {
         <div className="flex flex-col">
           <div className="flex items-center text-xl mb-2">
             <span className="font-bold mr-2">Tên chủ sở hữu tài khoản:</span>
-            <p>Võ thành trung</p>
+            <p>{userData.firstName}</p>
           </div>
           <div className="flex items-center text-xl mb-2">
             <span className="font-bold mr-2">Tên Đệm:</span>
-            <p>Võ</p>
+            <p>{userData.lastName}</p>
           </div>
           <div className="flex items-center text-xl">
             <span className="font-bold mr-2">Email:</span>
